@@ -6,21 +6,30 @@ const todos = [
   'Trouver du travail',
   'Payer son loyer'
 ]
-function App() {
-  return <>
-    <Title color='red' id='monid' className='maclass' data-demo='demo'>Mon composant</ Title>
-    {showTitle ? <h1 id="title" className="title" style={style} > {title}</h1> : <p>test</p>}
-    <ul>
-      {todos.map(todo => (<li key={todo}>{todo}</li>))}
-    </ul>
-  </>
-}
+import { useState } from "react";
 
-function Title({ color, children, hidden, ...props }) {
-  if (hidden) {
-    return null
+function App() {
+  const [person, setPerson] = useState({
+    firstName: 'John',
+    lastName: 'Doe',
+    age: 18
+  })
+  const [count, setCount] = useState(0)
+
+  const incrementAge = () => {
+    setPerson({ ...person, age: person.age + 1 })
   }
-  return <h1 style={{ color: color }} {...props}>{children}</h1>
+
+  const incrementCount = () => {
+    setCount(count + 1)
+  }
+
+  return <>
+    <p>Age de {person.firstName} : {person.age}</p>
+    <p>Compteur : {count}</p>
+    <button onClick={incrementAge}>Un an de +</button>
+    <button onClick={incrementCount}>Incrémenter</button>
+  </>
 }
 
 export default App
